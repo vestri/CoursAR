@@ -1,8 +1,8 @@
 .overlapcanvas{
-	width:640; 
+	width:640;
 	height:480;
 	position: absolute;
-    float: left;
+    float: center;
 	top: 0px;
 	left: 0px;
 }
