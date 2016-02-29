@@ -62,25 +62,22 @@
                     ctx.drawImage(video, 0, 0, 640, 480);
                     var imageData = ctx.getImageData(0, 0, 640, 480);
 
-                    // greyscale conversion
                     stat.start("grayscale");
-                    // I should put some code here
-                    jsfeat.imgproc.sobel_derivatives(imageData.data,img_u8);
-
+                    jsfeat.imgproc.grayscale(imageData.data, 640, 480, img_u8);
                     stat.stop("grayscale");
 
-                    // render result back to canvas (Warning: format is RGBA)
-                    stat.start("rewrite");
-                    // I should put some more code here
-                    
-
-
-
-
-                    stat.stop("rewrite");
+                    // render result back to canvas
+                    var data_u32 = new Uint32Array(imageData.data.buffer);// on recupere le premier pixel (pointeur)
+                    var alpha = (0xff << 24);// opacity = 1
+                    var i = img_u8.cols*img_u8.rows, pix = 0;
+                    while(--i >= 0) {
+                        pix = img_u8.data[i];
+                        data_u32[i] = alpha | (pix << 16) | (pix << 8) | pix;
+                    }
 
                     ctx.putImageData(imageData, 0, 0);
-                    log.innerHTML = stat.log();
+
+                    $('#log').html(stat.log());
                 }
             }
         }
