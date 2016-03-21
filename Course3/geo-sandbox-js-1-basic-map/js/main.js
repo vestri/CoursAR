@@ -2,8 +2,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	
 	//map (leaflet : http://leafletjs.com/examples/quick-start.html)
 	var map = L.map('myMap');
-	map.setView([0, 0], 3);
-
+	//map.setView([0, 0], 3);
+    map.locate({setView: true, maxzoom:16});
+    map.on('locationfound', onLocationFound);
+    function onLocationFound(e) {
+        console.log(e);
+        L.marker(e.latlng).addTo(map);
+    }
+    
 	//map pattern (WTMS). mapbox, ign, osm, ... 
 	//var mapPatternUrl = "http://tile.stamen.com/toner/{z}/{x}/{y}.png";
     //var mapPatternUrl = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg";
