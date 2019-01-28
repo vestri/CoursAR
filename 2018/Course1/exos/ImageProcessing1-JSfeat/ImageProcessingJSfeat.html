@@ -26,7 +26,7 @@
         // onload ask for camera and call demo_app
         window.onload = function () {
 
-            compatibility.getUserMedia({ video: true }, function (stream) {
+            navigator.mediaDevices.getUserMedia({ video: true }, function (stream) {
                 try {
                     setTimeout(function () {
                         video.play();

@@ -39,7 +39,7 @@ var compatibility = (function() {
         getUserMedia = function(options, success, error) {
             var getUserMedia =
                 window.navigator.getUserMedia ||
-                window.navigator.mozGetUserMedia ||
+                navigator.mediaDevices.getUserMedia ||
                 window.navigator.webkitGetUserMedia ||
                 window.navigator.msGetUserMedia ||
                 function(options, success, error) {
